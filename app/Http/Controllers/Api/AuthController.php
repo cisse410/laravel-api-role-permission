@@ -34,6 +34,8 @@ class AuthController extends Controller
 
         $user_role = Role::where(['name' => 'user'])->first();
 
+        $super_admin_role = Role::where(['name' => 'super_admin'])->first();
+
         if ($user_role) {
             $user->assignRole($user_role);
         }

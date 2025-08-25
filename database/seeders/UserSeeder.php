@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Formateur;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,30 +22,7 @@ class UserSeeder extends Seeder
         $user_update = Permission::create(['name' => 'users.update']);
         $user_delete = Permission::create(['name' => 'users.delete']);
 
-        $organisme_create = Permission::create(['name' => 'organisme.create']);
-
-        $formateur_create = Permission::create(['name' => 'formateur.create']);
-        $formateur_update = Permission::create(['name' => 'formateur.update']);
-
         $admin_role = Role::create(['name' => 'admin']);
-        $super_admin_role = Role::create(['name' => 'super_admin']);
-        $formateur_role = Role::create(['name' => 'formateur']);
-
-        $admin = Role::create(['name' => 'admin']);
-        $super_admin_role->givePermissionTo([
-            $formateur_create,
-            $formateur_update,
-        ]);
-        $admin->givePermissionTo([
-            $formateur_create,
-            $formateur_update,
-        ]);
-
-
-        $super_admin_role->givePermissionTo([
-            $organisme_create,
-        ]);
-        $formateur_role->givePermissionTo([$organisme_create]);
 
         $admin_role->givePermissionTo([
             $user_list,
@@ -83,10 +59,6 @@ class UserSeeder extends Seeder
         $user->assignRole($user_role);
 
         $user->givePermissionTo([
-            $user_list,
-        ]);
-
-        $user_role->givePermissionTo([
             $user_list,
         ]);
     }
